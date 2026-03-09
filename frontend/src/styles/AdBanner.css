@@ -1,0 +1,22 @@
+.ad-banner {
+  background-color: #f0f0f0;
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  padding: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.ad-placeholder {
+  color: #999;
+}
+
+.ad-placeholder p {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.ad-placeholder small {
+  display: block;
+  color: #bbb;
+}
