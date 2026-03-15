@@ -48,22 +48,22 @@ export const getBadgeInfo = (badge: string | null) => {
     top_rated: {
       label: 'Top Rated',
       description: 'Average rating of 9+',
-      icon: '⭐',
+      icon: '',
     },
     photographer: {
       label: 'Photographer',
       description: '100+ photos uploaded',
-      icon: '📸',
+      icon: '',
     },
     influencer: {
       label: 'Influencer',
       description: '1000+ followers',
-      icon: '🌟',
+      icon: '',
     },
     food_critic: {
       label: 'Food Critic',
       description: '500+ ratings given',
-      icon: '🍴',
+      icon: '',
     },
   };
 
