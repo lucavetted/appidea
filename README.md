@@ -2,39 +2,6 @@
 
 A Tinder-meets-Reddit social rating app where users can post photos and receive feedback from the community.
 
-## Project Structure
-
-```
-DEXBOT/
-├── backend/                 # Node.js/Express server
-│   ├── src/
-│   │   ├── config/         # Database configuration
-│   │   ├── controllers/    # Route controllers
-│   │   ├── routes/         # API routes
-│   │   ├── middleware/     # Authentication middleware
-│   │   ├── models/         # Data models
-│   │   ├── services/       # Business logic
-│   │   ├── migrations/     # Database migrations
-│   │   └── index.ts        # Entry point
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── .env.example
-├── frontend/               # React application
-│   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── pages/         # Page components
-│   │   ├── services/      # API services
-│   │   ├── context/       # React context
-│   │   ├── styles/        # CSS files
-│   │   ├── App.tsx
-│   │   └── index.tsx
-│   ├── public/
-│   ├── package.json
-│   └── tsconfig.json
-└── docs/                   # Documentation
-
-```
-
 ## Features
 
 ### Core Features
