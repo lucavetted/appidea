@@ -1,0 +1,23 @@
+.save-btn {
+  padding: 8px 12px;
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border-radius: 8px;
+}
+
+.save-btn:hover:not(:disabled) {
+  transform: scale(1.2);
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+.save-btn.saved {
+  color: #ff6b6b;
+}
+
+.save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

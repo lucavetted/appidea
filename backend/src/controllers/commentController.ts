@@ -69,7 +69,6 @@ export const updateComment = async (req: AuthRequest, res: Response) => {
     const { content } = req.body;
     const userId = req.userId;
 
-    // Check if user owns comment
     const commentCheck = await pool.query(
       'SELECT user_id FROM comments WHERE id = $1',
       [id]
@@ -99,7 +98,6 @@ export const deleteComment = async (req: AuthRequest, res: Response) => {
     const { id } = req.params;
     const userId = req.userId;
 
-    // Check if user owns comment
     const commentCheck = await pool.query(
       'SELECT user_id FROM comments WHERE id = $1',
       [id]
@@ -126,21 +124,18 @@ export const likeComment = async (req: AuthRequest, res: Response) => {
     const { comment_id } = req.body;
     const userId = req.userId;
 
-    // Check if already liked
     const existingLike = await pool.query(
       'SELECT id FROM comment_likes WHERE comment_id = $1 AND user_id = $2',
       [comment_id, userId]
     );
 
     if (existingLike.rows.length > 0) {
-      // Unlike
       await pool.query(
         'DELETE FROM comment_likes WHERE comment_id = $1 AND user_id = $2',
         [comment_id, userId]
       );
       res.json({ liked: false });
     } else {
-      // Like
       await pool.query(
         'INSERT INTO comment_likes (comment_id, user_id) VALUES ($1, $2)',
         [comment_id, userId]

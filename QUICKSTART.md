@@ -1,23 +1,119 @@
-# Quick Start Guide
+## ⚡ Quick Start Guide - Chopped or Not
 
-## Prerequisites
-- Node.js 18+ installed
-- PostgreSQL running locally (or accessible)
-- npm or yarn
+### Prerequisites
+✅ Node.js v22.14.0+
+✅ PostgreSQL 18+
+✅ npm or yarn
 
-## 1. Backend Setup (Terminal 1)
+---
 
+## 🚀 Get Running in 5 Minutes
+
+### Step 1: Backend Setup (2 minutes)
 ```bash
 cd backend
+
+# Install dependencies
 npm install
-```
 
-Create `.env` file:
-```bash
+# Create .env file
 cp .env.example .env
+
+# Update .env with your database URL:
+# DATABASE_URL=postgresql://user:password@localhost:5432/chopped_or_not
+# JWT_SECRET=your_secret_key
+# CLOUDINARY_NAME=your_cloud_name (optional, for image uploads)
+
+# Create database tables
+npm run migrate
+
+# Start server
+npm run dev
+# 🟢 Backend running on http://localhost:5000
 ```
 
-Edit `.env` and set your PostgreSQL URL:
+### Step 2: Frontend Setup (2 minutes)
+```bash
+cd frontend
+
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+# 🟢 Frontend running on http://localhost:3000
+```
+
+---
+
+## 🎮 Try It Out (1 minute)
+
+### First Time User
+1. Go to http://localhost:3000
+2. Click "Sign Up"
+3. Enter email, password, username
+4. Check backend terminal for verification code
+5. Enter code to verify
+6. Login and start using the app!
+
+### Test Features Quickly
+- **Feed**: Upload a photo, rate it
+- **Discover**: Click 🔍 to search
+- **Follow**: Find another user, follow them
+- **Save**: Save a photo with 🔖
+- **Notifications**: Check alerts
+- **Profile**: See your badges and stats
+
+---
+
+## 📂 Project Structure
+
+```
+backend/          # Express.js server
+frontend/         # React application
+README.md        # Full documentation
+IMPLEMENTATION_SUMMARY.md  # What was built
+```
+
+---
+
+## 🔌 Key Features
+
+✅ User Profiles with badges
+✅ Photo uploads & ratings
+✅ Follow system
+✅ Save/favorites
+✅ Search & discovery
+✅ Real-time notifications
+✅ Threaded comments
+✅ Leaderboard
+✅ Gamification
+
+---
+
+## 🐛 Troubleshooting
+
+### Backend won't start
+- PostgreSQL running? `psql -U postgres`
+- .env file created? `cp .env.example .env`
+- Database URL correct in .env?
+
+### Frontend shows errors
+- Backend running? Check http://localhost:5000/api/health
+- Try: `cd backend && npm run build`
+
+### Verification code not showing
+- Check terminal output when signing up
+
+---
+
+## 📚 Full Documentation
+
+See [README.md](./README.md) for complete details.
+
+---
+
+**Happy rating! 🌟**
 ```
 DATABASE_URL=postgresql://postgres:password@localhost:5432/chopped_or_not
 JWT_SECRET=dev_secret_key_12345

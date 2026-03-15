@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userService } from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { BadgeDisplay } from '../components/BadgeDisplay';
 import '../styles/Profile.css';
 
 const Profile: React.FC = () => {
@@ -53,8 +54,21 @@ const Profile: React.FC = () => {
           <img src={profile.avatar_url} alt={profile.username} className="avatar" />
         )}
         <div className="profile-info">
-          <h1>{profile.username}</h1>
+          <div className="profile-name-section">
+            <h1>{profile.username}</h1>
+            <BadgeDisplay badge={profile.badge} isVerified={profile.is_verified} />
+          </div>
           <p>{profile.email}</p>
+          <div className="profile-stats">
+            <div className="stat">
+              <span className="stat-value">{profile.followers_count || 0}</span>
+              <span className="stat-label">Followers</span>
+            </div>
+            <div className="stat">
+              <span className="stat-value">{profile.following_count || 0}</span>
+              <span className="stat-label">Following</span>
+            </div>
+          </div>
         </div>
       </div>
 

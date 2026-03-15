@@ -7,7 +7,6 @@ export const createRating = async (req: AuthRequest, res: Response) => {
     const { photo_id, score, comment } = req.body;
     const userId = req.userId;
 
-    // Check if already rated
     const existingRating = await pool.query(
       'SELECT id FROM ratings WHERE photo_id = $1 AND user_id = $2',
       [photo_id, userId]
@@ -53,7 +52,6 @@ export const updateRating = async (req: AuthRequest, res: Response) => {
     const { score, comment } = req.body;
     const userId = req.userId;
 
-    // Check if user owns rating
     const ratingCheck = await pool.query(
       'SELECT user_id FROM ratings WHERE id = $1',
       [id]
@@ -83,7 +81,6 @@ export const deleteRating = async (req: AuthRequest, res: Response) => {
     const { id } = req.params;
     const userId = req.userId;
 
-    // Check if user owns rating
     const ratingCheck = await pool.query(
       'SELECT user_id FROM ratings WHERE id = $1',
       [id]

@@ -8,6 +8,9 @@ import Feed from './pages/Feed';
 import Profile from './pages/Profile';
 import Leaderboard from './pages/Leaderboard';
 import Messages from './pages/Messages';
+import { SearchPage } from './pages/SearchPage';
+import { SavedPage } from './pages/SavedPage';
+import { NotificationsPage } from './pages/NotificationsPage';
 import './App.css';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -51,6 +54,30 @@ const AppContent: React.FC = () => {
           element={
             <ProtectedRoute>
               <Messages />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <ProtectedRoute>
+              <SearchPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/saved"
+          element={
+            <ProtectedRoute>
+              <SavedPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute>
+              <NotificationsPage />
             </ProtectedRoute>
           }
         />

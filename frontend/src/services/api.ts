@@ -6,7 +6,6 @@ export const api = axios.create({
   baseURL: API_URL,
 });
 
-// Add token to requests
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -15,22 +14,21 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Auth services
 export const authService = {
   signup: (email: string, password: string, username: string) =>
     api.post('/auth/signup', { email, password, username }),
   login: (email: string, password: string) =>
     api.post('/auth/login', { email, password }),
+  verifyEmail: (userId: number, code: string) =>
+    api.post('/auth/verify-email', { userId, code }),
 };
 
-// User services
 export const userService = {
   getProfile: (id: number) => api.get(`/users/profile/${id}`),
   updateProfile: (data: any) => api.put('/users/profile', data),
   getLeaderboard: () => api.get('/users/leaderboard'),
 };
 
-// Photo services
 export const photoService = {
   uploadPhoto: (photo_url: string, caption: string) =>
     api.post('/photos', { photo_url, caption }),
@@ -40,7 +38,6 @@ export const photoService = {
   deletePhoto: (id: number) => api.delete(`/photos/${id}`),
 };
 
-// Rating services
 export const ratingService = {
   createRating: (photo_id: number, score: number, comment: string) =>
     api.post('/ratings', { photo_id, score, comment }),
@@ -51,7 +48,6 @@ export const ratingService = {
   deleteRating: (id: number) => api.delete(`/ratings/${id}`),
 };
 
-// Message services
 export const messageService = {
   sendMessage: (recipient_id: number, message_text: string) =>
     api.post('/messages', { recipient_id, message_text }),
@@ -59,7 +55,6 @@ export const messageService = {
   getConversation: (userId: number) => api.get(`/messages/${userId}`),
 };
 
-// Comment services
 export const commentService = {
   createComment: (photo_id: number, content: string, parent_comment_id?: number) =>
     api.post('/comments', { photo_id, content, parent_comment_id }),
@@ -74,4 +69,52 @@ export const commentService = {
     api.post('/comments/like', { comment_id }),
   getCommentLikes: (comment_id: number) =>
     api.get(`/comments/likes/${comment_id}`),
+};
+
+export const followService = {
+  followUser: (following_id: number) =>
+    api.post('/follows/follow', { following_id }),
+  unfollowUser: (following_id: number) =>
+    api.post('/follows/unfollow', { following_id }),
+  getFollowers: (userId: number) =>
+    api.get(`/follows/followers/${userId}`),
+  getFollowing: (userId: number) =>
+    api.get(`/follows/following/${userId}`),
+  isFollowing: (followingId: number) =>
+    api.get(`/follows/is-following/${followingId}`),
+};
+
+export const saveService = {
+  savePhoto: (photo_id: number) =>
+    api.post('/saved/save', { photo_id }),
+  unsavePhoto: (photo_id: number) =>
+    api.post('/saved/unsave', { photo_id }),
+  getSavedPhotos: (limit = 10, offset = 0) =>
+    api.get('/saved/saved', { params: { limit, offset } }),
+  isSaved: (photoId: number) =>
+    api.get(`/saved/is-saved/${photoId}`),
+};
+
+export const searchService = {
+  searchUsers: (query: string) =>
+    api.get('/search/users', { params: { query } }),
+  searchPhotos: (query: string) =>
+    api.get('/search/photos', { params: { query } }),
+  getTrending: (limit = 20) =>
+    api.get('/search/trending', { params: { limit } }),
+  getRecommended: (limit = 20) =>
+    api.get('/search/recommended', { params: { limit } }),
+};
+
+export const notificationService = {
+  getNotifications: (limit = 20, offset = 0) =>
+    api.get('/notifications/', { params: { limit, offset } }),
+  markAsRead: (notificationId: number) =>
+    api.post(`/notifications/mark-read`, { notificationId }),
+  markAllAsRead: () =>
+    api.post('/notifications/mark-all-read'),
+  getUnreadCount: () =>
+    api.get('/notifications/unread-count'),
+  deleteNotification: (notificationId: number) =>
+    api.delete(`/notifications/${notificationId}`),
 };

@@ -9,23 +9,64 @@ const Signup: React.FC = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [userId, setUserId] = useState<number | null>(null);
+  const [step, setStep] = useState<'signup' | 'verify'>('signup');
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const response = await authService.signup(email, password, username);
-      login(response.data.user, response.data.token);
-      navigate('/feed');
-    } catch (err) {
-      setError('Signup failed. Please try again.');
+      setUserId(response.data.user.id);
+      setStep('verify');
+      setError('');
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Signup failed. Please try again.');
     }
   };
 
+  const handleVerifyEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!userId) return;
+    
+    try {
+      const response = await authService.verifyEmail(userId, verificationCode);
+      login(response.data.user, response.data.token);
+      navigate('/feed');
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Verification failed. Please try again.');
+    }
+  };
+
+  if (step === 'verify') {
+    return (
+      <div className="auth-container">
+        <form className="auth-form" onSubmit={handleVerifyEmail}>
+          <h1>Verify Email</h1>
+          <p>We sent a verification code to {email}</p>
+          {error && <div className="error">{error}</div>}
+          <input
+            type="text"
+            placeholder="Enter 6-digit code"
+            value={verificationCode}
+            onChange={(e) => setVerificationCode(e.target.value)}
+            maxLength={6}
+            required
+          />
+          <button type="submit">Verify Email</button>
+          <p>
+            <a href="#" onClick={() => setStep('signup')}>Back to Sign Up</a>
+          </p>
+        </form>
+      </div>
+    );
+  }
+
   return (
     <div className="auth-container">
-      <form className="auth-form" onSubmit={handleSubmit}>
+      <form className="auth-form" onSubmit={handleSignup}>
         <h1>Sign Up</h1>
         {error && <div className="error">{error}</div>}
         <input

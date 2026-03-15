@@ -63,6 +63,13 @@
   color: #999;
 }
 
+.photo-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
 .rate-btn {
   width: 100%;
   padding: 0.75rem;

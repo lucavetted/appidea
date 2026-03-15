@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ratingService } from '../services/api';
+import { SaveButton } from './SaveButton';
 import CommentSection from './CommentSection';
 import '../styles/PhotoCard.css';
 
@@ -34,11 +35,14 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ photo }) => {
           <span className="username">{photo.username}</span>
         </div>
         <p className="caption">{photo.caption}</p>
-        <div className="rating-info">
-          <span className="average-rating">
-            {photo.average_rating ? photo.average_rating.toFixed(1) : 'N/A'}/10
-          </span>
-          <span className="total-ratings">({photo.total_ratings} ratings)</span>
+        <div className="photo-actions">
+          <div className="rating-info">
+            <span className="average-rating">
+              {photo.average_rating ? photo.average_rating.toFixed(1) : 'N/A'}/10
+            </span>
+            <span className="total-ratings">({photo.total_ratings} ratings)</span>
+          </div>
+          <SaveButton photoId={photo.id} />
         </div>
       </div>
 

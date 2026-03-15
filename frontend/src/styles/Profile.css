@@ -24,6 +24,45 @@
 .profile-info h1 {
   margin-bottom: 0.5rem;
   color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-name-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.profile-name-section h1 {
+  margin: 0;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff6b6b;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #999;
+  text-transform: uppercase;
+  margin-top: 4px;
 }
 
 .profile-info p {

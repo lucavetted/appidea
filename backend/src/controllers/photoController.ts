@@ -1,19 +1,46 @@
 import { Response } from 'express';
 import pool from '../config/database';
 import { AuthRequest } from '../middleware/auth';
+import { v2 as cloudinary } from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export const uploadPhoto = async (req: AuthRequest, res: Response) => {
   try {
-    const { photo_url, caption } = req.body;
-    const userId = req.userId;
+    const { photo_url, caption, file_data } = req.body;
+    const userId = req.user?.userId;
+
+    if (!userId) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    let finalPhotoUrl = photo_url;
+
+    if (file_data) {
+      try {
+        const uploadResult = await cloudinary.uploader.upload(file_data, {
+          folder: 'chopped-or-not/photos',
+          resource_type: 'auto',
+        });
+        finalPhotoUrl = uploadResult.secure_url;
+      } catch (uploadError) {
+        console.error('Cloudinary upload error:', uploadError);
+        return res.status(500).json({ error: 'Failed to upload image to cloud' });
+      }
+    }
 
     const result = await pool.query(
       'INSERT INTO photos (user_id, photo_url, caption) VALUES ($1, $2, $3) RETURNING *',
-      [userId, photo_url, caption]
+      [userId, finalPhotoUrl, caption]
     );
 
     res.status(201).json(result.rows[0]);
   } catch (error) {
+    console.error('Upload photo error:', error);
     res.status(500).json({ error: 'Failed to upload photo' });
   }
 };
@@ -72,7 +99,6 @@ export const deletePhoto = async (req: AuthRequest, res: Response) => {
     const { id } = req.params;
     const userId = req.userId;
 
-    // Check if user owns photo
     const photoCheck = await pool.query(
       'SELECT user_id FROM photos WHERE id = $1',
       [id]
