@@ -1,6 +1,6 @@
 # Chopped or Not
 
-A Tinder-meets-Reddit social rating app where users can post photos and receive feedback from the community.
+A Tinder meets Reddit social rating app where users can post photos and receive feedback from the community.
 
 ## Features
 
