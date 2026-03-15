@@ -49,7 +49,7 @@ export const SaveButton: React.FC<SaveButtonProps> = ({ photoId, onSaveChange })
       disabled={loading}
       title={isSaved ? 'Remove from saved' : 'Save for later'}
     >
-      {loading ? '...' : isSaved ? '🔖' : '🔗'}
+      {loading ? '...' : isSaved ? 'Saved' : 'Save'}
     </button>
   );
 };

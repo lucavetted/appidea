@@ -88,15 +88,15 @@ export const NotificationsPage: React.FC = () => {
   const getNotificationIcon = (type: string) => {
     switch (type) {
       case 'follow':
-        return '👤';
+        return '';
       case 'like':
-        return '❤️';
+        return '';
       case 'comment':
-        return '💬';
+        return '';
       case 'rating':
-        return '⭐';
+        return '';
       default:
-        return '📢';
+        return '';
     }
   };
 

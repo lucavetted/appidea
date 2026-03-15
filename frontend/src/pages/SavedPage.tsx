@@ -55,7 +55,7 @@ export const SavedPage: React.FC = () => {
   return (
     <div className="saved-container">
       <div className="saved-header">
-        <h1>💾 My Saved Photos</h1>
+        <h1>My Saved Photos</h1>
         <p className="saved-count">
           {photos.length === 0 ? 'No saved photos yet' : `${photos.length} saved photos`}
         </p>
@@ -78,7 +78,7 @@ export const SavedPage: React.FC = () => {
                 <p className="user">by {photo.username}</p>
                 <div className="photo-footer">
                   <div className="rating">
-                    ⭐ {photo.average_rating?.toFixed(1) || 'N/A'} ({photo.total_ratings})
+                     {photo.average_rating?.toFixed(1) || 'N/A'} ({photo.total_ratings})
                   </div>
                   <SaveButton 
                     photoId={photo.id}
@@ -96,7 +96,7 @@ export const SavedPage: React.FC = () => {
       ) : (
         !loading && (
           <div className="empty-state">
-            <div className="empty-icon">🔖</div>
+            <div className="empty-icon"></div>
             <h2>No Saved Photos Yet</h2>
             <p>Start exploring and save your favorite photos to view them later!</p>
           </div>

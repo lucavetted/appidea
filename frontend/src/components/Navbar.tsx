@@ -16,8 +16,8 @@ const Navbar: React.FC = () => {
         {isAuthenticated ? (
           <>
             <Link to="/feed">Feed</Link>
-            <Link to="/search">🔍 Discover</Link>
-            <Link to="/saved">💾 Saved</Link>
+            <Link to="/search">Discover</Link>
+            <Link to="/saved">Saved</Link>
             <Link to="/leaderboard">Leaderboard</Link>
             <Link to="/messages">Messages</Link>
             <Link to="/notifications">Notifications</Link>

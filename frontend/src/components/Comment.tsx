@@ -37,7 +37,7 @@ const Comment: React.FC<CommentProps> = ({ comment, onDelete, onReplyClick }) =>
     try {
       await commentService.updateComment(comment.id, editContent);
       setEditing(false);
-      window.location.reload(); // Refresh to show updated comment
+      window.location.reload();
     } catch (error) {
       console.error('Failed to update comment:', error);
     }

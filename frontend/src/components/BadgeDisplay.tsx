@@ -11,25 +11,25 @@ export const BadgeDisplay: React.FC<BadgeDisplayProps> = ({ badge, isVerified })
     switch (badgeName) {
       case 'top_rated':
         return {
-          icon: '⭐',
+          icon: '',
           label: 'Top Rated',
           color: 'gold',
         };
       case 'photographer':
         return {
-          icon: '📸',
+          icon: '',
           label: 'Photographer',
           color: 'purple',
         };
       case 'influencer':
         return {
-          icon: '🌟',
+          icon: '',
           label: 'Influencer',
           color: 'blue',
         };
       case 'food_critic':
         return {
-          icon: '🍴',
+          icon: '',
           label: 'Food Critic',
           color: 'orange',
         };
@@ -44,7 +44,7 @@ export const BadgeDisplay: React.FC<BadgeDisplayProps> = ({ badge, isVerified })
     <div className="badge-display">
       {isVerified && (
         <div className="badge verified-badge" title="Verified">
-          ✓
+          
         </div>
       )}
       {badgeInfo && (
